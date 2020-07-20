@@ -1,5 +1,6 @@
 import rules from '../rule/index';
 import { isEmptyValue } from '../util';
+import deep from './deep';
 /**
  *  Validates an array.
  *
@@ -15,16 +16,20 @@ function array(rule, value, callback, source, options) {
   const validate =
     rule.required || (!rule.required && source.hasOwnProperty(rule.field));
   if (validate) {
+    // 非必须且没值，自然没继续的必要
     if (isEmptyValue(value, 'array') && !rule.required) {
       return callback();
     }
-    rules.required(rule, value, source, errors, options, 'array');
+    rules.required(rule, value, source, errors, options, 'array'); // 是否必须且有值
     if (!isEmptyValue(value, 'array')) {
       rules.type(rule, value, source, errors, options);
       rules.range(rule, value, source, errors, options);
     }
+    // 缓存errors
+    callback.cache = errors;
+    deep(rule, value, callback, source, options);
   }
-  callback(errors);
+  // callback(errors);
 }
 
 export default array;

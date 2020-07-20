@@ -13,6 +13,7 @@ const ENUM = 'enum';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
+// rule中要定义枚举，value是否属于该枚举
 function enumerable(rule, value, source, errors, options) {
   rule[ENUM] = Array.isArray(rule[ENUM]) ? rule[ENUM] : [];
   if (rule[ENUM].indexOf(value) === -1) {

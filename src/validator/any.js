@@ -11,6 +11,7 @@ import { isEmptyValue } from '../util';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
+// 这个any只有在required为true的时候有意义，否则都不会出错
 function any(rule, value, callback, source, options) {
   const errors = [];
   const validate =
@@ -19,7 +20,7 @@ function any(rule, value, callback, source, options) {
     if (isEmptyValue(value) && !rule.required) {
       return callback();
     }
-    rules.required(rule, value, source, errors, options);
+    rules.required(rule, value, source, errors, options); // 是否必须且有值
   }
   callback(errors);
 }

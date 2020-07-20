@@ -45,6 +45,7 @@ export function newMessages() {
     pattern: {
       mismatch: '%s value %s does not match pattern %s',
     },
+    // 拷贝对象，注意json不拷贝方法
     clone() {
       const cloned = JSON.parse(JSON.stringify(this));
       cloned.clone = this.clone;

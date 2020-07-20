@@ -2,6 +2,7 @@ import * as util from '../util';
 
 /**
  *  Rule for validating whitespace.
+ * 空白
  *
  *  @param rule The validation rule.
  *  @param value The value of the field on the source object.

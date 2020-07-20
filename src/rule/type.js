@@ -69,6 +69,7 @@ const types = {
 
 /**
  *  Rule for validating the type of a value.
+ * 检查提供的type和值是否匹配
  *
  *  @param rule The validation rule.
  *  @param value The value of the field on the source object.
@@ -98,6 +99,7 @@ function type(rule, value, source, errors, options) {
   ];
   const ruleType = rule.type;
   if (custom.indexOf(ruleType) > -1) {
+    // type和value是否匹配
     if (!types[ruleType](value)) {
       errors.push(
         util.format(
@@ -108,6 +110,7 @@ function type(rule, value, source, errors, options) {
       );
     }
     // straight typeof check
+    // 直接用typeof检测
   } else if (ruleType && typeof value !== rule.type) {
     errors.push(
       util.format(options.messages.types[ruleType], rule.fullField, rule.type),

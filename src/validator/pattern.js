@@ -13,6 +13,7 @@ import { isEmptyValue } from '../util';
  *  @param source The source object being validated.
  *  @param options The validation options.
  *  @param options.messages The validation messages.
+ * 传入的值是否满足正则
  */
 function pattern(rule, value, callback, source, options) {
   const errors = [];

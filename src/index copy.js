@@ -5,7 +5,6 @@ import {
   warning,
   deepMerge,
   convertFieldsError,
-  exec,
 } from './util';
 import validators from './validator/index';
 import { messages as defaultMessages, newMessages } from './messages';
@@ -162,9 +161,6 @@ Schema.prototype = {
       });
     });
     const errorFields = {};
-    return this.controller(series, options, results => {
-      complete(results);
-    });
     return asyncMap(
       series,
       options,
@@ -346,36 +342,6 @@ Schema.prototype = {
     }
     // 其他取值
     return validators[this.getType(rule)] || false;
-  },
-  // 分发验证
-  controller(series, options, callback) {
-    let reslut = [];
-    if (options.first) {
-      const flattenArr = flattenObjArr(series);
-      return exec(flattenArr, true, options, es => {
-        callback(reslut.concat(es));
-      });
-    } else if (options.firstFields) {
-      let keys = Object.keys(series);
-      let ps = keys.map(key => {
-        return exec(series[key], true, options);
-      });
-      return Promise.all(ps).then(errArray => {
-        reslut = [].concat.apply(reslut, errArray);
-        callback(reslut);
-        return reslut;
-      });
-    } else {
-      let keys = Object.keys(series);
-      let ps = keys.map(key => {
-        return exec(series[key], false, options);
-      });
-      return Promise.all(ps).then(errArray => {
-        reslut = [].concat.apply(reslut, errArray);
-        callback(reslut);
-        return reslut;
-      });
-    }
   },
 };
 

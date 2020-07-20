@@ -10,6 +10,7 @@ import { isEmptyValue } from '../util';
  *  @param source The source object being validated.
  *  @param options The validation options.
  *  @param options.messages The validation messages.
+ * 传入的值是否是正则
  */
 function regexp(rule, value, callback, source, options) {
   const errors = [];

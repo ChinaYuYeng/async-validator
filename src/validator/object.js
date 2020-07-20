@@ -23,8 +23,11 @@ function object(rule, value, callback, source, options) {
     if (value !== undefined) {
       rules.type(rule, value, source, errors, options);
     }
+    // 缓存errors
+    callback.cache = errors;
+    deep(rule, value, callback, source, options);
   }
-  callback(errors);
+  // callback(errors);
 }
 
 export default object;

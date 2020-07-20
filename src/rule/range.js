@@ -43,6 +43,8 @@ function range(rule, value, source, errors, options) {
     val = value.replace(spRegexp, '_').length;
   }
   if (len) {
+    // 数字直接=len，其他是length
+    // len优先级高于min，max
     if (val !== rule.len) {
       errors.push(
         util.format(options.messages[key].len, rule.fullField, rule.len),

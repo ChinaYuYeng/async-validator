@@ -1,6 +1,7 @@
 import rules from '../rule/index.js';
 import { isEmptyValue } from '../util';
 
+// 专门给url，email，hex使用
 function type(rule, value, callback, source, options) {
   const ruleType = rule.type;
   const errors = [];
